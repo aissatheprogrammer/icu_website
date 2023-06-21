@@ -1,0 +1,304 @@
+.title {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+
+  left: 50%;
+  top: 13.5vh;
+  transform: translate(-50%, -50%);
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2.521vw;
+
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000;
+
+  align-items: center;
+  justify-content: center;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* fonts */
+
+@font-face {
+  font-family: Outfit;
+  src: url(../data/Outfit-VariableFont_wght.ttf);
+}
+
+/* rest of the page */
+
+.rectangle {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 395px;
+
+  overflow: auto;
+  font-size: 1.5rem;
+
+  letter-spacing: 0.04em;
+  font-style: normal;
+
+  color: 11eE1E;
+  display: flex;
+  border: 1px solid #000000;
+  border-radius: 60px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.box-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.199vw;
+  line-height: 22px;
+  text-transform: uppercase;
+  height: 22px;
+  margin-top: 15px;
+}
+
+.middle-box-text {
+  /* esplications-dans-bulles */
+  position: absolute;
+  font-family: "Outfit";
+  font-weight: 200;
+
+  line-height: 120%;
+  width: 991px;
+  text-align: center;
+  letter-spacing: -0.03em;
+  color: #1e1e1e;
+  align-items: center;
+  font-style: normal;
+  font-weight: 200;
+  overflow: hidden;
+
+}
+
+#last-message-box {
+  position: absolute;
+  bottom: 4.8vh;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.083vw;
+  line-height: 120%;
+  /* identical to box height, or 36px */
+
+  text-align: center;
+
+  /* color: #aaaaaa; */
+  color: #AAAAAA;
+}
+
+/* to show box when hovering on top of bar chart */
+#tooltip {
+  position: absolute;
+  top: 196.8vh;
+  background-color: rgba(251, 251, 251, 0.811);
+  border: 1px solid rgb(0, 0, 0);
+  padding: 10px;
+  border-radius: 25px;
+  visibility: hidden;
+}
+
+#container {
+  margin: 0 auto;
+  margin-top: 400px;
+  width: 1014px;
+  height: 140.96px;
+}
+
+
+
+.icu-rectangles {
+  display: none;
+  z-index: 1;
+  position: absolute;
+
+  transform: translate(-50%, -50%);
+  border-radius: 10.66px;
+  width: 344px;
+  height: 41px;
+
+  opacity: 0.9;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  left: 50%;
+  margin-top: -50px;
+}
+
+.mapbox-title-box-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35.02px;
+  line-height: 44px;
+  /* identical to box height */
+
+  text-align: center;
+  text-transform: capitalize;
+  color: #FFFFFF;
+}
+
+.icu-title-box-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 44px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: white;
+}
+
+.graph-section-title {
+  margin-top: 250px;
+  font-style: italic;
+  font-weight: 200;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-family: "Source Sans Pro";
+  font-size: 35.02px;
+}
+
+#container {
+  margin-top: 410px
+}
+
+#rectangle0 {
+  margin-top: 473px;
+}
+
+#rectangle2 {
+  margin-top: 400px
+}
+
+#rectangle4 {
+  height: 500px;
+  margin-top: 300px
+}
+
+.anychart-credits {
+  display: none;
+}
+
+#ac_path_3,
+#ac_path_39,
+#ac_path_7,
+#ac_path_x {
+  display: none;
+  background-color: transparent;
+}
+
+#chart-bra {
+  text-align: center;
+  display: inline-block;
+  align-items: center;
+  position: absolute;
+  margin: 0 auto;
+  /* Center the SVG horizontally */
+  display: block;
+}
+
+.bar:hover rect {
+  stroke: rgb(16, 16, 16);
+  stroke-width: 1px;
+}
+
+.domain {
+  display: none;
+}
+
+
+
+/* 
+I think it's illegal to hide it?? not sure about it so I'm gonna leave it as it is
+.mapboxgl-ctrl {
+  display: none;
+} */
+
+
+@media only screen and (max-width: 767px) {
+
+  /* Your mobile styles here */
+  .title {
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  .box-title {
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 13px;
+  }
+
+  .rectangle {
+    text-overflow: ellipsis;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+
+  }
+
+  .middle-box-text {
+    width: 300px;
+    margin-top: 40px;
+  }
+
+  #last-message-box {
+    font-size: 13px;
+  }
+
+  .graph-section-title {
+    font-size: 15px;
+    margin-top: 200px;
+    width: 100px;
+    height: 10.96px;
+
+  }
+
+  .mapbox-title-box-text {
+    font-size: 12px;
+  }
+
+  #container {
+    width: 400px;
+    margin-top: 200px;
+  }
+}

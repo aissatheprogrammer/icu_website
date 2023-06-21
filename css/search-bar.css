@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(255, 255, 255);
+}
+
+.search-container {
+  z-index: 1;
+  position: absolute;
+  max-width: 32.25vw;
+  top: 155.94vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.search-container .search_input {
+  background: #ffff;
+  border-radius: 29px;
+}
+
+.search_input input {
+  height: 55px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 29px;
+  padding: 0 0px 0 20px;
+  font-size: 1.25vw;
+}
+
+.suggestion-list li:hover {
+  background-color: #0053b3;
+  color: #fff;
+}
+
+.suggestion-list li {
+  padding: 1.389vw 1.389vw;
+}
+
+/* so that the last suggestion matches it's container */
+.suggestion-list li:last-child {
+  border-radius: 0 0 29px 29px;
+}
+
+/* .search-container:focus-within {
+  box-shadow: 0px 0px 100px #000000;
+  border-radius: 29px;
+} */
+
+.suggestion-list {
+  transition: transform 0.3s ease-in-out, right 0.3s ease-in-out;
+}
+
+.search-container {
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out,
+    height 0.3s ease-in-out, top 0.3s ease-in-out, right 0.3s ease-in-out;
+}
+
+@media only screen and (max-width: 767px) {
+  /* Your mobile styles here */
+  .search-container {
+    max-width: 200px;
+    margin-top: 15px;
+  }
+  .search_input input {
+    height: 55px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 29px;
+    padding: 0 0px 0 20px;
+    font-size: 13px;
+  }
+  .suggestion-list li {
+    font-size: 12px;
+    padding: 2.389vw 1.389vw;
+  }
+
+
+  
+}
+

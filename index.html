@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>ICU Research</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/map-box.css" />
+    <link rel="stylesheet" href="./css/search-bar.css" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-heatmap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
+
+    <script type="module" src="./js/searchBar.js"></script>
+    <script type="module" src="./js/map.js"></script>
+
+    <!-- google fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro"
+    />
+
+    <script type="module" src="./js/radarChart.js" defer></script>
+    <script type="text/javascript" src="./js/lineChart.js" defer></script>
+    <script type="module" src="./js/HeatMap.js" defer></script>
+  </head>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+
+  <body style="overflow: hidden">
+    <div class="text-align title">
+      Habitez-vous dans un îlot de chaleur urbain ?
+    </div>
+
+    <div class="rectangle" id="rectangle0">
+      <p class="box-title">Qu'est-ce qu'un îlot de chaleur urbain ?</p>
+      <p class="col-md-9 middle-box-text">
+        Les vagues de chaleur plus nombreuses et plus intenses exposent les
+        villes à des températures extrêmes, en particulier la nuit où la
+        température reste plus élevée qu’à la campagne. Cette différence de
+        température nocturne ville/campagne correspond à l’îlot de chaleur
+        urbain (ICU)
+      </p>
+
+      <p id="last-message-box" class="container">
+        Decouvrez comment cela vous impacte
+      </p>
+
+      <svg
+        style="position: absolute; bottom: 22px"
+        height="2.01vh"
+        viewBox="0 0 71 29"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <a href="#mapbox-legend">
+          <path
+            d="M35.0914 29C34.2123 29.0007 33.3416 28.8808 32.5295 28.6472C31.7173 28.4136 30.9797 28.0709 30.3591 27.6388L1.96027 7.93029C0.705125 7.05911 -6.29508e-06 5.87753 0 4.6455C6.29516e-06 3.41347 0.705148 2.2319 1.9603 1.36073C3.21546 0.489552 4.91781 0.000133007 6.69287 0.00013735C8.46792 0.000141693 10.1703 0.489568 11.4254 1.36075L35.0914 17.7845L58.7574 1.36061C60.0125 0.489431 61.7149 4.34339e-06 63.4899 0C65.265 -4.34334e-06 66.9673 0.489414 68.2225 1.36059C69.4776 2.23176 70.1828 3.41333 70.1828 4.64536C70.1828 5.8774 69.4777 7.05897 68.2225 7.93015L39.8237 27.6389C39.203 28.071 38.4654 28.4137 37.6533 28.6473C36.8411 28.8808 35.9705 29.0007 35.0914 29Z"
+            fill="#AAAAAA"
+          />
+        </a>
+      </svg>
+    </div>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
+      }
+
+      a[href^="#"] {
+        scroll-behavior: auto;
+      }
+
+      a[href^="#mapbox-legend"] {
+        transition: scroll-margin 2s ease;
+        scroll-margin: 100px; /* Adjust this value to control the amount of slowdown */
+      }
+    </style>
+
+    <div class="container" style="position: absolute; margin-top: -40px">
+      <img
+        id="mapbox-legend"
+        class="img-fluid"
+        src="data/svg/mapbox_legend.svg"
+        alt="Legende Carte Mapbox"
+      />
+    </div>
+
+    <div
+      id="map"
+      style="height: 91.7vh; filter: blur(5.50986px); pointer-events: none"
+    ></div>
+
+    <h3
+      id="entrer-adresse"
+      class="container graph-section-title"
+      style="
+        font-weight: 400;
+        display: inline-block;
+        margin-top: -500px;
+        color: white;
+      "
+    >
+      Merci De Rentrer Votre Adresse
+    </h3>
+
+    <section class="icuValueMessage">
+      <div
+        id="icu-rectangle-blue"
+        class="icu-rectangles"
+        style="background-color: #81f7e9"
+      >
+        <p class="icu-title-box-text">Vous vivez dans un ICU Faible</p>
+      </div>
+
+      <div
+        id="icu-rectangle-green"
+        class="icu-rectangles"
+        style="background-color: #94db34"
+      >
+        <p class="icu-title-box-text">Vous vivez dans un ICU Faible</p>
+      </div>
+
+      <div
+        id="icu-rectangle-yellow"
+        class="icu-rectangles"
+        style="background-color: #f3e053"
+      >
+        <p class="icu-title-box-text">Vous vivez dans un ICU Moyen</p>
+      </div>
+
+      <div
+        id="icu-rectangle-orange"
+        class="icu-rectangles"
+        style="background-color: #dc9447"
+      >
+        <p class="icu-title-box-text">Vous vivez dans un ICU Fort</p>
+      </div>
+
+      <div
+        id="icu-rectangle-red"
+        class="icu-rectangles"
+        style="background-color: #e84a58"
+      >
+        <p class="icu-title-box-text">Vous vivez dans un ICU Fort</p>
+      </div>
+    </section>
+
+    <div class="search-container" id="search-container">
+      <div class="search_input">
+        <input
+          autocomplete="off"
+          type="text"
+          placeholder="Chercher une adresse..."
+          name="location"
+          id="input"
+        />
+        <div class="suggestion-list" style="list-style-type: none"></div>
+      </div>
+    </div>
+
+    <div class="rectangle" id="rectangle2">
+      <p class="box-title">Qu'est-ce qu'une Local Climate Zone ?</p>
+      <p class="col-md-9 middle-box-text">
+        Une Local Climate Zone (LCZ) est un système de classification
+        international utilisé pour analyser le climat urbain dans les villes. Il
+        est composé de zones d'environ 10 hectares qui sont classées en fonction
+        de leur forme urbaine (taux de végétation, hauteur des bâtiments, taux
+        d'imperméabilisation des sols, etc.). Grenoble est divisée en 88 LCZ
+        différentes, chacune ayant ses propres caractéristiques. La carte des
+        LCZ a également été utilisée pour déterminer l'emplacement des capteurs
+        de température
+      </p>
+    </div>
+
+    <style>
+      .popup-text {
+        display: inline;
+      }
+
+      @media (max-width: 768px) {
+        .popup-text {
+          display: none;
+        }
+      }
+    </style>
+
+    <h3
+      class="container graph-section-title"
+      style="margin-top: -70px; width: 100%; display: inline-block"
+    >
+      Carte LCZ
+    </h3>
+
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 d-flex">
+          <div class="d-inline-block text-center">
+            <img
+              class="img-fluid text-center mx-auto d-block center-block"
+              src="data/svg/carte grenoble.png"
+              alt="Carte LCZ"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+          <div class="d-inline-block" style="margin-left: 100px">
+            <img
+              class="img-fluid"
+              src="data/svg/lcz_legend.svg"
+              alt="Legende pour la carte LCZ"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="rectangle" id="rectangle1" style="top: 350px">
+        <p class="box-title">
+          Observer l'ICU par la mesure de la température de l’air
+        </p>
+        <p class="col-md-9 middle-box-text">
+          30 capteurs de température (à 3 mètres du sol) et 3 stations
+          météorologiques ont été installés par la Ville de Grenoble pour créer
+          un réseau d’observation et mesurer les gradients de température
+          relatifs à l’îlot de chaleur urbain. Les données des stations
+          Météo-France du Versoud et du CEA viennent compléter ce réseau. En
+          journée, les écarts de température entre le centre-ville et le Versoud
+          ne dépassent pas ici 1°C, confirmant que le phénomène d’îlot de
+          chaleur urbain caractérisé par l’écart de température entre le
+          centre-ville et sa périphérie est un phénomène nocturne
+        </p>
+      </div>
+    </div>
+
+    <h3 class="container graph-section-title">
+      Explorez la courbe de température de
+      <span style="color: #db7a58">votre quartier</span> et comparez la à la
+      station de référence située au
+      <span style="color: #5c6fdb"> Versoud </span>
+    </h3>
+
+    <div id="container" style="margin-top: 330px"></div>
+    <svg
+      id="radar-chart"
+      viewBox="0 0 565 565"
+      width="565px"
+      height="565px"
+      preserveAspectRatio="xMidYMid meet"
+      style="display: block; margin: auto; margin-top: 10px"
+    ></svg>
+
+    <style>
+      @media (max-width: 600px) {
+        #radar-chart {
+          width: 100%;
+        }
+      }
+    </style>
+    <div class="rectangle" id="rectangle3" style="top: 350px">
+      <p class="box-title">Les facteurs responsables de l’ICU</p>
+      <p class="col-md-9 middle-box-text">
+        <b>1.</b> Les surfaces verticales (murs exposés au soleil) <br />
+        <b>2.</b> « L’effet de canyon » (bâtiments hauts et rapprochés qui
+        piègent le rayonnement), décrit par le degré d’ouverture du ciel depuis
+        le sol (sky view factor) <br />
+        <b>3.</b> L’inertie thermique associée à la nature des matériaux (dont
+        l’effet de l’albédo) et la réduction des flux d’air par la rugosité des
+        bâtiments <br /><b>4.</b> L’absence de végétation <br />
+        <b>5.</b> Les surfaces imperméabilisées (parking, voiries, places
+        minéralisées) <br />
+        <b>6.</b> L’activité humaine (circulation automobile, climatisation...)
+      </p>
+    </div>
+
+    <h3 class="container graph-section-title" style="margin-top: 300px">
+      Explorez la forme urbaine de votre quartier et comparez la à la forme
+      moyenne de la ville de Grenoble
+    </h3>
+
+    <div
+      style="
+        text-align: center;
+        display: inline-block;
+        align-items: center;
+        margin: 0 auto; /* Center the SVG horizontally */
+        display: block;
+        margin-top: 400px;
+      "
+    >
+      <img
+        class="container"
+        src="data/svg/barchart-legend.svg"
+        alt="barchart legend"
+      />
+    </div>
+
+    <svg
+      id="bar-graph"
+      viewBox="0 0 800 120"
+      style="margin-top: 20px"
+      preserveAspectRatio="xMidYMid meet"
+    ></svg>
+
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3">
+          <h3 class="text-center">Votre LCZ</h3>
+        </div>
+        <div class="col-md-4">
+          <div class="d-flex justify-content-center">
+            <div class="p-5">
+              <img src="data/svg/svf.svg" alt="SVG Example" />
+              <div class="text-center mt-2">Sky View Factor :</div>
+              <p
+                style="text-align: center; font-weight: bold; margin-top: 26px"
+                id="users-svf"
+              ></p>
+            </div>
+            <div class="p-5">
+              <img
+                src="data/svg/hauteur_moyenne_batiments.svg"
+                alt="SVG Example"
+              />
+              <div class="text-center mt-2">
+                Hauteur Moyenne Des Bâtiments :
+              </div>
+              <p
+                style="text-align: center; font-weight: bold"
+                id="users-building-height"
+              ></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3">
+          <h3 class="text-center">
+            Moyenne <br />
+            Grenoblois
+          </h3>
+        </div>
+        <div class="col-md-4">
+          <div class="d-flex justify-content-center">
+            <div class="p-5">
+              <img src="data/svg/svf.svg" alt="SVG Example" />
+              <div class="text-center mt-2">Sky View Factor :</div>
+              <p
+                style="text-align: center; font-weight: bold; margin-top: 26px"
+                id="mean-svf"
+              >
+                0.785
+              </p>
+            </div>
+            <div class="p-5">
+              <img
+                src="data/svg/hauteur_moyenne_batiments.svg"
+                alt="SVG Example"
+              />
+              <div class="text-center mt-2">
+                Hauteur Moyenne Des Bâtiments :
+              </div>
+              <p
+                style="text-align: center; font-weight: bold"
+                id="mean-building-height"
+              >
+                14.3
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./js/horizontalBarChart.js"></script>
+
+    <div id="tooltip" class="hidden">
+      <p><strong></strong> <span id="key"></span></p>
+      <p><strong></strong> <span id="value"></span></p>
+    </div>
+
+    <div class="container">
+      <div class="rectangle" id="rectangle4">
+        <p class="box-title">QUELLES PERSPECTIVES ?</p>
+        <p class="col-md-9 middle-box-text">
+          <br />
+          <br />
+          La connaissance du climat urbain permet de prendre en compte le
+          phénomène d’îlot de chaleur urbain dans les projets d’aménagement et
+          dans la planification urbaine : détermination des zones prioritaires,
+          croisement avec les données de vulnérabilité, prise en compte du
+          phénomène dans l’aménagement des nouveaux quartiers. En parallèle, la
+          Ville de Grenoble active sur tout son territoire les différents
+          leviers qui jouent en faveur de la réduction de l’îlot de chaleur
+          urbain :
+          <br />• végétalisation de l’espace public<br />• soutien à la
+          végétalisation de l’espace privé<br />• désimperméabilisation de rues,
+          de cours d’écoles, de terrasses, de parking... <br />
+          Le défi est d’aménager la ville de demain sans augmenter l’îlot de
+          chaleur urbain, voire en le réduisant et d’anticiper l’organisation de
+          la cité face à la nouvelle donne climatique (rythmes de vie,
+          accompagnement des habitants...)
+          <br /><br />
+          <br />
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="container"
+      style="
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: -40px;
+      "
+    >
+      <img
+        id="mapbox-legend"
+        class="img-fluid"
+        src="data/svg/last-map.svg"
+        alt="Legende Derniere Carte Mapbox"
+      />
+    </div>
+
+    <div
+      id="map2"
+      style="width: 100%; height: 700px; width: 90vw; margin: 0 auto"
+    ></div>
+  </body>
+</html>
