@@ -183,11 +183,11 @@ body {
 
   text-align: center;
 
-  color: white;
+  color: black;
 }
 
 .graph-section-title {
-  margin-top: 250px;
+  margin-top: 240px;
   font-style: italic;
   font-weight: 200;
   position: absolute;
@@ -245,15 +245,6 @@ body {
 .domain {
   display: none;
 }
-
-
-
-/* 
-I think it's illegal to hide it?? not sure about it so I'm gonna leave it as it is
-.mapboxgl-ctrl {
-  display: none;
-} */
-
 
 @media only screen and (max-width: 767px) {
 
