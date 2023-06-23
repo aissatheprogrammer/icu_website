@@ -29,7 +29,14 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro"
     />
-
+    <!--  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!--  -->
     <script type="module" src="./js/radarChart.js" defer></script>
     <script type="text/javascript" src="./js/lineChart.js" defer></script>
     <script type="module" src="./js/HeatMap.js" defer></script>
@@ -251,8 +258,8 @@
 
     <h3 class="container graph-section-title">
       Explorez la courbe de température de
-      <span style="color: #db7a58">votre quartier</span> et comparez la à la
-      station de référence située au
+      <span style="color: #db7a58">Votre Lcz</span> et comparez la à la station
+      de référence située au
       <span style="color: #5c6fdb"> Versoud </span>
     </h3>
 
@@ -289,9 +296,9 @@
       </p>
     </div>
 
-    <h3 class="container graph-section-title" style="margin-top: 300px">
-      Explorez la forme urbaine de votre quartier et comparez la à la forme
-      moyenne de la ville de Grenoble
+    <h3 class="container graph-section-title" style="margin-top: 250px">
+      Explorez la forme urbaine de votre lcz et comparez la à la forme moyenne
+      de la ville de Grenoble
     </h3>
 
     <div
@@ -301,7 +308,7 @@
         align-items: center;
         margin: 0 auto; /* Center the SVG horizontally */
         display: block;
-        margin-top: 400px;
+        margin-top: 500px;
       "
     >
       <img
@@ -313,8 +320,8 @@
 
     <svg
       id="bar-graph"
-      viewBox="0 0 1000 150"
-      style="margin-top: 20px"
+      viewBox="0 0 1000 200"
+      style="margin-top: 100px"
       preserveAspectRatio="xMidYMid meet"
     ></svg>
 
@@ -352,10 +359,7 @@
 
       <div class="row justify-content-center align-items-center">
         <div class="col-md-3">
-          <h3 class="text-center">
-            Moyenne <br />
-            Grenoblois
-          </h3>
+          <h3 class="text-center">Moyenne<br /></h3>
         </div>
         <div class="col-md-4">
           <div class="d-flex justify-content-center">
@@ -442,7 +446,75 @@
 
     <div
       id="map2"
-      style="width: 100%; height: 700px; width: 90vw; margin: 0 auto"
+      style="width: 100%; height: 720px; width: 90vw; margin: 0 auto"
     ></div>
+
+    <div
+      style="
+        position: relative;
+        margin-top: 180px;
+        z-index: 1;
+        display: flex;
+        width: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 2.521vw;
+        text-align: center;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #000;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      réalisé par :
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 220px">
+      <img
+        src="turbine-logo.png"
+        style="width: 179px; height: 179px; margin: 0 45px"
+      />
+
+      <img
+        src="metropole-logo.png"
+        style="width: 179px; height: 179px; margin: 0 45px"
+      />
+      <img
+        src="ville-grenoble-logo.png"
+        style="width: 179px; height: 179px; margin: 0 45px"
+      />
+    </div>
+
+    <div style="margin-bottom: 30px; position: relative; text-align: right">
+      <h6>
+        Designed and Made by
+        <a
+          style="color: black"
+          target="_blank"
+          href="https://www.aissamabroumi.com/"
+        >
+          <u>Aissa Mabroumi</u>
+        </a>
+      </h6>
+    </div>
+    <style>
+      h6 {
+        margin-top: 220px;
+        color: #000;
+        font-size: 12.857px;
+        font-family: "Lato", sans-serif;
+        font-weight: 275;
+        margin-right: 30px;
+      }
+
+      a:hover u {
+        opacity: 0.75;
+        transition: opacity 0.3s ease;
+      }
+    </style>
   </body>
 </html>

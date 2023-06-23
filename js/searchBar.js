@@ -242,8 +242,6 @@ suggestionList.addEventListener("click", (event) => {
           console.log("aaaa", lczId);
           updateBarChart(lczId);
 
-          /////////////////////////////
-
           function logCoordinates(closestPointsDict) {
             for (const key in closestPointsDict) {
               const point = closestPointsDict[key];
@@ -280,6 +278,14 @@ suggestionList.addEventListener("click", (event) => {
                     "FRATRAAA",
                     icuClass
                   );
+
+                  // Find the element with the ID "text_1"
+                  var element = document.getElementById("barchart-label-1");
+
+                  // Change the text content of the element
+                  element.textContent = "Votre lcz";
+
+                  /////////////////////////////
 
                   if (closestPointsDict[key].icuRadarClass == icuClass) {
                     if (!chosenRadar) {

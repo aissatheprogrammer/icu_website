@@ -3,7 +3,7 @@ var margin = { top: 20, right: 20, bottom: 30, left: 150 },
     parseInt(d3.select("#bar-graph").style("width")) -
     margin.left -
     margin.right,
-  height = 215 - margin.top - margin.bottom;
+  height = 285 - margin.top - margin.bottom;
 
 // set the ranges
 var y = d3.scaleBand().range([height, 0]).padding(0.3);
@@ -49,14 +49,14 @@ export function updateBarChart(varLcz) {
       // finding index of selected zone
 
       // finding index of selected zone
-      var meanIndex = data
+      var chosenIndex = data
         .map(function (e) {
           return e.Quartiers;
         })
         .indexOf(String(varLcz));
 
       // selecting the zone wanted by its index and putting it in a list so that the forEach method works
-      data = [data[index], data[meanIndex]];
+      data = [data[index], data[chosenIndex]];
 
       // format the data
       data.forEach(function (d) {
@@ -126,10 +126,14 @@ export function updateBarChart(varLcz) {
           let value = data[0].data;
           let key = data[0].data.Quartiers;
 
+          if (!isNaN(key)) {
+            key = "Votre LCZ";
+          }
+
           var subgroupName = d3.select(this.parentNode).datum().key;
           var subgroupValue = event.data[subgroupName].toFixed(1);
 
-          value = `${subgroupName} : ${subgroupValue}%`;
+          value = `${subgroupValue}%`;
           // update the tooltip with the information about the bar
           d3.select("#tooltip")
             .style("left", xPos + "px")
@@ -148,39 +152,13 @@ export function updateBarChart(varLcz) {
           d3.select("#tooltip").style("display", "none");
         });
 
-      // add labels to the bars
-      bar
-        .selectAll("text")
-        .attr(
-          "viewBox",
-          "0 0 " +
-            (width + margin.left + margin.right) +
-            " " +
-            (height + margin.top + margin.bottom)
-        )
-        .attr("preserveAspectRatio", "xMinYMin meet")
-        .data(function (d) {
-          return d;
-        })
-        .enter()
-        .append("text")
-        .attr("x", function (d) {
-          return x(d[1]) - x(d[0]) - 10;
-        })
-        .attr("y", function (d) {
-          return y(d.data.Quartiers) + y.bandwidth() / 2;
-        })
-        .attr("dy", "0.35em")
-        .attr("text-anchor", "end")
-        .text(function (d) {
-          return d.key;
-        });
-
-      // add the x Axis
-      svgBar.append("g").attr("transform", "translate(0," + height + ")");
-
       // add the y Axis
-      svgBar.append("g").call(d3.axisLeft(y));
+      svgBar
+        .append("g")
+        .call(d3.axisLeft(y))
+        .selectAll("text")
+        .style("font-size", "17px")
+        .attr("id", (d, i) => "barchart-label-" + i);
     }
   );
 }
