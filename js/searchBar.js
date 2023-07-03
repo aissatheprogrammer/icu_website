@@ -79,7 +79,9 @@ function fetchUserIcuValue() {
       console.log("ICU value:", icuVal);
 
       // Log the color based on the ICU value
-      if (icuVal >= -8 && icuVal < 30) {
+      if (icuVal >= -8 && icuVal < 25) {
+        icuClass = "cold-blue";
+      } else if (icuVal >= 25 && icuVal < 30) {
         icuClass = "blue";
       } else if (icuVal >= 30 && icuVal < 35) {
         icuClass = "green";
@@ -97,7 +99,14 @@ function fetchUserIcuValue() {
         icuClass
       );
       setTimeout(() => {
-        const icuColorsList = ["blue", "green", "yellow", "orange", "red"]; // Replace with your list
+        const icuColorsList = [
+          "cold-blue",
+          "blue",
+          "green",
+          "yellow",
+          "orange",
+          "red",
+        ]; // Replace with your list
         console.log("VVVVVVVVVVVVV", icuColorsList);
         let icuColoredRectangle;
         for (let i = 0; i < icuColorsList.length; i++) {
@@ -279,13 +288,15 @@ suggestionList.addEventListener("click", (event) => {
                     icuClass
                   );
 
-                  // Find the element with the ID "text_1"
-                  var element = document.getElementById("barchart-label-1");
+                  // Find the element with the ID "barchart-label-1"
+                  var barchartElement =
+                    document.getElementById("barchart-label-1");
 
                   // Change the text content of the element
-                  element.textContent = "Votre lcz";
+                  barchartElement.textContent = "Votre LCZ";
 
-                  /////////////////////////////
+                  // Select and remove the div element with the class "no-graph-allert"
+                  document.querySelector(".no-graph-allert")?.remove();
 
                   if (closestPointsDict[key].icuRadarClass == icuClass) {
                     if (!chosenRadar) {
@@ -351,10 +362,23 @@ suggestionList.addEventListener("click", (event) => {
             }
 
             const [hauteurMoy, usersSvf] = getHauteurById(lczId);
-            console.log("users lcz", lczId);
+            console.log("users LCZ", lczId);
+
+            console.log("8787878787878787878788");
 
             let userSvfElement = document.getElementById("users-svf");
             userSvfElement.innerHTML = usersSvf;
+            if (usersSvf > 0.8) {
+              document.getElementById("svf-image").src =
+                "data/svg/svf-faible.svg";
+            } else if (usersSvf >= 0.7 && usersSvf <= 0.8) {
+              document.getElementById("svf-image").src =
+                "data/svg/svf-modere.svg";
+            } else if (usersSvf < 0.7) {
+              document.getElementById("svf-image").src =
+                "data/svg/svf-fort.svg";
+            }
+
             let userHauteurMoy = document.getElementById(
               "users-building-height"
             );

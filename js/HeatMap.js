@@ -5,6 +5,7 @@ let firstCall = true;
 
 export function drawHeatMap() {
   anychart.onDocumentReady(function () {
+    
     // create data
     var data = result;
     console.log("vvvvvv", data);
@@ -37,7 +38,9 @@ export function drawHeatMap() {
     var chart = anychart.heatMap(data);
 
     // set the chart title
-    chart.title("Heat Map :");
+    // chart.title(
+    //   "Écart de température entre votre LCZ et la station de référence"
+    // );
 
     // create and configure the color scale.
     var customColorScale = anychart.scales.linearColor();
@@ -69,6 +72,11 @@ export function drawHeatMap() {
       graphUpdater(formatDate(e.iterator.get("x")));
     });
     chart.tooltip(false);
+
+    // Custom formatting for the temperature values
+    chart.labels().format(function () {
+      return this.heat.toFixed(1) + "°C";
+    });
 
     // initiate drawing the chart
     chart.draw();

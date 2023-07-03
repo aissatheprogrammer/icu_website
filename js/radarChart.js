@@ -264,7 +264,7 @@ function maxDifference(id, data) {
     }
   });
   Object.keys(maxDiffByDate).forEach((date) => {
-    result.push({ x: date, y: "A", heat: maxDiffByDate[date] });
+    result.push({ x: date, y: "Votre LCZ", heat: maxDiffByDate[date] });
   });
   drawHeatMap();
   return result;

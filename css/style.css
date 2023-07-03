@@ -227,6 +227,14 @@ body {
   background-color: transparent;
 }
 
+.marker {
+  background-image: url("../data/svg/diamond.svg");
+  background-size: cover;
+  width: 30px;
+  height: 37px;
+  cursor: pointer;
+}
+
 #chart-bra {
   text-align: center;
   display: inline-block;
@@ -246,7 +254,15 @@ body {
   display: none;
 }
 
+
+.credits-imgs {width: 179px; height: 179px; margin: 0 45px}
 @media only screen and (max-width: 767px) {
+
+  .credits-imgs {
+    width: 107px;
+    height: 107px;
+    flex-shrink: 0;
+  }
 
   /* Your mobile styles here */
   .title {

@@ -9,7 +9,6 @@
     />
     <title>ICU Research</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/map-box.css" />
     <link rel="stylesheet" href="./css/search-bar.css" />
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css"
@@ -33,9 +32,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap"
       rel="stylesheet"
     />
+
     <!--  -->
     <script type="module" src="./js/radarChart.js" defer></script>
     <script type="text/javascript" src="./js/lineChart.js" defer></script>
@@ -50,6 +50,13 @@
   />
 
   <body style="overflow: hidden">
+    <h1
+      class="sr-only"
+      style="position: absolute; left: -9999px; overflow: hidden"
+    >
+      Aissa Mabroumi
+    </h1>
+
     <div class="text-align title">
       Habitez-vous dans un îlot de chaleur urbain ?
     </div>
@@ -74,6 +81,7 @@
         viewBox="0 0 71 29"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        class="darken-on-hover"
       >
         <a href="#mapbox-legend">
           <path
@@ -82,6 +90,12 @@
           />
         </a>
       </svg>
+
+      <style>
+        .darken-on-hover:hover path {
+          fill: #777777;
+        }
+      </style>
     </div>
     <style>
       html {
@@ -128,11 +142,32 @@
 
     <section class="icuValueMessage">
       <div
+        id="icu-rectangle-cold-blue"
+        class="icu-rectangles"
+        style="background-color: #7e86ac"
+      >
+        <p class="icu-title-box-text">
+          Vous vivez dans un ICU Modéré<span style="color: gray"
+            >*<sup class="reference-num">1</sup></span
+          >
+        </p>
+      </div>
+
+      <style>
+        .reference-num {
+          font-size: 10px;
+        }
+      </style>
+      <div
         id="icu-rectangle-blue"
         class="icu-rectangles"
         style="background-color: #81f7e9"
       >
-        <p class="icu-title-box-text">Vous vivez dans un ICU Faible</p>
+        <p class="icu-title-box-text">
+          Vous vivez dans un ICU Modéré<span style="color: gray"
+            >*<sup class="reference-num">1</sup></span
+          >
+        </p>
       </div>
 
       <div
@@ -140,7 +175,11 @@
         class="icu-rectangles"
         style="background-color: #94db34"
       >
-        <p class="icu-title-box-text">Vous vivez dans un ICU Faible</p>
+        <p class="icu-title-box-text">
+          Vous vivez dans un ICU Marqué<span style="color: gray"
+            >*<sup class="reference-num">1</sup></span
+          >
+        </p>
       </div>
 
       <div
@@ -148,7 +187,11 @@
         class="icu-rectangles"
         style="background-color: #f3e053"
       >
-        <p class="icu-title-box-text">Vous vivez dans un ICU Moyen</p>
+        <p class="icu-title-box-text">
+          Vous vivez dans un ICU Marqué<span style="color: gray"
+            >*<sup class="reference-num">1</sup></span
+          >
+        </p>
       </div>
 
       <div
@@ -156,7 +199,11 @@
         class="icu-rectangles"
         style="background-color: #dc9447"
       >
-        <p class="icu-title-box-text">Vous vivez dans un ICU Fort</p>
+        <p class="icu-title-box-text">
+          Vous vivez dans un ICU Intense<span style="color: gray"
+            >*<sup class="reference-num">1</sup></span
+          >
+        </p>
       </div>
 
       <div
@@ -164,7 +211,11 @@
         class="icu-rectangles"
         style="background-color: #e84a58"
       >
-        <p class="icu-title-box-text">Vous vivez dans un ICU Fort</p>
+        <p class="icu-title-box-text">
+          Vous vivez dans un ICU Intense<span style="color: gray"
+            >*<sup class="reference-num">1</sup></span
+          >
+        </p>
       </div>
     </section>
 
@@ -258,20 +309,76 @@
 
     <h3 class="container graph-section-title">
       Explorez la courbe de température de
-      <span style="color: #db7a58">Votre Lcz</span> et comparez la à la station
-      de référence située au
-      <span style="color: #5c6fdb"> Versoud </span>
+      <span style="color: #db7a58">Votre LCZ</span> et comparez la à la
+      <span style="color: #5c6fdb"> station de référence</span> située au
+      Versoud<span style="color: gray"
+        >*<sup class="reference-num">2</sup></span
+      >
     </h3>
 
-    <div id="container" style="margin-top: 330px"></div>
-    <svg
-      id="radar-chart"
-      viewBox="0 0 565 565"
-      width="565px"
-      height="565px"
-      preserveAspectRatio="xMidYMid meet"
-      style="display: block; margin: auto; margin-top: 10px"
-    ></svg>
+    <div>
+      <h4
+        style="
+          margin-top: 330px;
+          color: #7c868e;
+          text-align: center;
+          font-size: 15.036px;
+          font-family: Verdana;
+        "
+      >
+        Écart de température maximale entre votre LCZ et la station de référence
+      </h4>
+    </div>
+
+    <div id="container" style="margin-top: 5px"></div>
+
+    <div>
+      <h4
+        style="
+          color: #7c868e;
+          text-align: center;
+          font-size: 15.036px;
+          font-family: Verdana;
+        "
+      >
+        Relevé de température par heure
+      </h4>
+    </div>
+
+    <div
+      class="no-graph-allert"
+      style="
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      "
+    >
+      <img src="data/svg/no-graph-allert.svg" alt="" />
+    </div>
+
+    <div style="position: relative">
+      <svg
+        id="radar-chart"
+        viewBox="0 0 565 565"
+        width="565px"
+        height="565px"
+        preserveAspectRatio="xMidYMid meet"
+        style="display: block; margin: auto; margin-top: 10px"
+      ></svg>
+
+      <img
+        src="data/svg/moon.svg"
+        alt="moon svg"
+        style="
+          position: absolute;
+          width: 34px;
+          height: 34px;
+          top: calc(50% - 565px / 2 + 10px);
+          right: calc(50% - 565px / 2 + 100px);
+        "
+      />
+    </div>
 
     <style>
       @media (max-width: 600px) {
@@ -297,9 +404,23 @@
     </div>
 
     <h3 class="container graph-section-title" style="margin-top: 250px">
-      Explorez la forme urbaine de votre lcz et comparez la à la forme moyenne
-      de la ville de Grenoble
+      Explorez la forme urbaine de votre LCZ et comparez la à la forme moyenne
+      de la Ville de Grenoble
     </h3>
+
+    <div>
+      <h4
+        style="
+          margin-top: 330px;
+          color: #7c868e;
+          text-align: center;
+          font-size: 15.036px;
+          font-family: Verdana;
+        "
+      >
+        Répartition de la surface par catégorie de forme urbaine
+      </h4>
+    </div>
 
     <div
       style="
@@ -308,7 +429,7 @@
         align-items: center;
         margin: 0 auto; /* Center the SVG horizontally */
         display: block;
-        margin-top: 500px;
+        margin-top: 30px;
       "
     >
       <img
@@ -318,22 +439,39 @@
       />
     </div>
 
+    <div
+      class="no-graph-allert"
+      style="
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      "
+    >
+      <img src="data/svg/no-graph-allert.svg" alt="" />
+    </div>
+
     <svg
       id="bar-graph"
       viewBox="0 0 1000 200"
-      style="margin-top: 100px"
+      style="margin-top: 90px"
       preserveAspectRatio="xMidYMid meet"
     ></svg>
-
     <div class="container">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-3">
           <h3 class="text-center">Votre LCZ</h3>
         </div>
         <div class="col-md-4">
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center align-bottom">
+            <!-- Added 'align-bottom' class -->
             <div class="p-5">
-              <img src="data/svg/svf.svg" alt="SVG Example" />
+              <img
+                src="data/svg/svf-modere.svg"
+                alt="SVG Example"
+                id="svf-image"
+                style="height: 110px"
+              />
               <div class="text-center mt-2">Sky View Factor :</div>
               <p
                 style="text-align: center; font-weight: bold; margin-top: 26px"
@@ -362,9 +500,14 @@
           <h3 class="text-center">Moyenne<br /></h3>
         </div>
         <div class="col-md-4">
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center align-bottom">
+            <!-- Added 'align-bottom' class -->
             <div class="p-5">
-              <img src="data/svg/svf.svg" alt="SVG Example" />
+              <img
+                src="data/svg/svf-modere.svg"
+                alt="SVG Example"
+                style="height: 110px"
+              />
               <div class="text-center mt-2">Sky View Factor :</div>
               <p
                 style="text-align: center; font-weight: bold; margin-top: 26px"
@@ -472,28 +615,38 @@
     >
       réalisé par :
     </div>
-
-    <div style="display: flex; justify-content: center; margin-top: 220px">
-      <img
-        src="turbine-logo.png"
-        style="width: 179px; height: 179px; margin: 0 45px"
-      />
-
-      <img
-        src="metropole-logo.png"
-        style="width: 179px; height: 179px; margin: 0 45px"
-      />
-      <img
-        src="ville-grenoble-logo.png"
-        style="width: 179px; height: 179px; margin: 0 45px"
-      />
+    <div
+      style="
+        margin-top: 60px;
+        color: #000;
+        text-align: center;
+        font-size: 12.857px;
+        font-family: Lato;
+        font-style: normal;
+        font-weight: 100;
+        line-height: normal;
+      "
+    >
+      <p>
+        <span style="font-weight: 400">Illustrations : </span> <br />
+        <br />Jean-Benoit Godefroy, Aissa Mabroumi <br />
+        <br />
+        <span style="font-weight: 400">Géographe climatologue : </span> <br />
+        <br />
+        Xavier Foissard
+      </p>
     </div>
 
-    <div style="margin-bottom: 30px; position: relative; text-align: right">
-      <h6>
+    <div style="display: flex; justify-content: center; margin-top: 100px">
+      <img class="credits-imgs" src="data/svg/metropole-logo.svg" />
+      <img class="credits-imgs" src="data/svg/ville-grenoble-logo.svg" />
+    </div>
+
+    <div style="margin-bottom: 30px; position: relative; text-align: center">
+      <h6 style="font-weight: bold">
         Designed and Made by
         <a
-          style="color: black"
+          style="color: black; font-weight: bold"
           target="_blank"
           href="https://www.aissamabroumi.com/"
         >
@@ -501,9 +654,10 @@
         </a>
       </h6>
     </div>
+
     <style>
       h6 {
-        margin-top: 220px;
+        margin-top: 160px;
         color: #000;
         font-size: 12.857px;
         font-family: "Lato", sans-serif;
@@ -514,6 +668,160 @@
       a:hover u {
         opacity: 0.75;
         transition: opacity 0.3s ease;
+      }
+    </style>
+
+    <!-- <span style="color: gray">*<sup class="reference-num">1</sup></span> -->
+
+    <div id="aller-loin">
+      <p class="container" id="last-message-description">
+        Pour aller plus loin
+      </p>
+
+      <svg
+        id="svg-click"
+        style="position: relative; margin-bottom: 50px"
+        height="14px"
+        viewBox="0 0 71 29"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="darken-on-hover"
+      >
+        <path
+          d="M35.0914 29C34.2123 29.0007 33.3416 28.8808 32.5295 28.6472C31.7173 28.4136 30.9797 28.0709 30.3591 27.6388L1.96027 7.93029C0.705125 7.05911 -6.29508e-06 5.87753 0 4.6455C6.29516e-06 3.41347 0.705148 2.2319 1.9603 1.36073C3.21546 0.489552 4.91781 0.000133007 6.69287 0.00013735C8.46792 0.000141693 10.1703 0.489568 11.4254 1.36075L35.0914 17.7845L58.7574 1.36061C60.0125 0.489431 61.7149 4.34339e-06 63.4899 0C65.265 -4.34334e-06 66.9673 0.489414 68.2225 1.36059C69.4776 2.23176 70.1828 3.41333 70.1828 4.64536C70.1828 5.8774 69.4777 7.05897 68.2225 7.93015L39.8237 27.6389C39.203 28.071 38.4654 28.4137 37.6533 28.6473C36.8411 28.8808 35.9705 29.0007 35.0914 29Z"
+          fill="#AAAAAA"
+        />
+      </svg>
+
+      <div id="new-section" style="display: none">
+        <!-- New section content -->
+        <p>
+          <br />
+          <br />
+          <br />
+          <br /><br />
+          <br />
+        </p>
+
+        <div style="display: flex; align-items: center">
+          <span
+            style="color: gray; display: inline-block; vertical-align: middle"
+            >*<sup class="reference-num"></sup
+          ></span>
+
+          <p
+            style="
+              display: flex;
+              width: 451px;
+              flex-direction: column;
+              flex-shrink: 0;
+              color: #000;
+
+              /* Body/Small */
+              font-size: 12px;
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 18px;
+              margin-bottom: 0; /* Add this line to remove bottom margin */
+            "
+          >
+            Les données de la station du Versoud proviennent de Météo France.
+          </p>
+        </div>
+
+        <div style="display: flex">
+          <span
+            style="color: gray; display: inline-block; vertical-align: middle"
+            >*<sup class="reference-num">1</sup></span
+          >
+          <p
+            style="
+              width: 451px;
+              flex-direction: column;
+              flex-shrink: 0;
+              color: #000;
+
+              /* Body/Small */
+              font-size: 12px;
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 18px;
+              margin-bottom: 0; /* Add this line to remove bottom margin */
+              margin-left: 10px; /* Add this line to create spacing between the span and the text */
+            "
+          >
+            Les classes choisies sont les suivantes : - "Modéré" : Ecart de
+            température inférieure à 3°C - "Marqué" : Ecart de température de
+            3°C à 4°C - "Intense" : Ecart de température supérieure à 4°C Ces
+            classes sont relatives à la ville de Grenoble.
+          </p>
+        </div>
+
+        <div style="display: flex">
+          <span
+            style="color: gray; display: inline-block; vertical-align: middle"
+            >*<sup class="reference-num">2</sup></span
+          >
+
+          <p
+            style="
+              width: 451px;
+              flex-direction: column;
+              flex-shrink: 0;
+              color: #000;
+
+              /* Body/Small */
+              font-size: 12px;
+              font-family: Inter;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 18px;
+              margin-bottom: 0; /* Add this line to remove bottom margin */
+              margin-left: 10px; /* Add this line to create spacing between the span and the text */
+            "
+          >
+            La station du Versoud est située en pleine campagne, à 12 km de
+            Grenoble
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const svg = document.getElementById("svg-click");
+      const newSection = document.getElementById("new-section");
+
+      svg.addEventListener("click", function () {
+        newSection.style.display = "block";
+      });
+    </script>
+
+    <h5>
+      https://www.grenoble.fr/cms_viewFile.php?idtf=28295&path=ilot-de-chaleur-urbain.pdf
+    </h5>
+
+    <style>
+      #aller-loin {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 90px;
+      }
+
+      #last-message-description {
+        position: absolute;
+        margin-bottom: 12vh;
+        font-family: "Outfit";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 120%;
+        /* identical to box height, or 36px */
+
+        color: #aaaaaa;
       }
     </style>
   </body>
