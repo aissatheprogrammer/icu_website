@@ -254,9 +254,90 @@ body {
   display: none;
 }
 
+.popup-text {
+  display: inline;
+}
+
+.darken-on-hover:hover path {
+  fill: #777777;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+#radar-chart {
+  width: 100%;
+}
+
+a[href^="#"] {
+  scroll-behavior: auto;
+}
+
+.reference-num {
+  font-size: 10px;
+}
+
+a[href^="#mapbox-legend"] {
+  transition: scroll-margin 2s ease;
+  scroll-margin: 100px; /* Adjust this value to control the amount of slowdown */
+}
+#made-by-div {margin-bottom: 30px; position: relative; text-align: center}
+
+#made-by {
+  margin-top: 160px;
+  font-weight: bold;
+  font-size: 12.857px;
+  font-family: "Lato", sans-serif;
+  font-weight: 275;
+  margin-right: 30px;
+}
+
+a:hover u {
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+#aller-loin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 90px;
+}
+
+#last-message-description {
+  position: absolute;
+  margin-bottom: 12vh;
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 120%;
+  /* identical to box height, or 36px */
+
+  color: #aaaaaa;
+}
+
+.more-info-text {display: flex;
+  width: 451px;
+  flex-direction: column;
+  flex-shrink: 0;
+  /* Body/Small */
+  font-size: 12px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 0; /* Add this line to remove bottom margin */}
 
 .credits-imgs {width: 179px; height: 179px; margin: 0 45px}
+
 @media only screen and (max-width: 767px) {
+  .popup-text {
+    display: none;
+  }
 
   .credits-imgs {
     width: 107px;

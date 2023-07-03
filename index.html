@@ -90,28 +90,7 @@
           />
         </a>
       </svg>
-
-      <style>
-        .darken-on-hover:hover path {
-          fill: #777777;
-        }
-      </style>
     </div>
-    <style>
-      html {
-        scroll-behavior: smooth;
-        scroll-snap-type: y mandatory;
-      }
-
-      a[href^="#"] {
-        scroll-behavior: auto;
-      }
-
-      a[href^="#mapbox-legend"] {
-        transition: scroll-margin 2s ease;
-        scroll-margin: 100px; /* Adjust this value to control the amount of slowdown */
-      }
-    </style>
 
     <div class="container" style="position: absolute; margin-top: -40px">
       <img
@@ -153,11 +132,6 @@
         </p>
       </div>
 
-      <style>
-        .reference-num {
-          font-size: 10px;
-        }
-      </style>
       <div
         id="icu-rectangle-blue"
         class="icu-rectangles"
@@ -245,18 +219,6 @@
         de température
       </p>
     </div>
-
-    <style>
-      .popup-text {
-        display: inline;
-      }
-
-      @media (max-width: 768px) {
-        .popup-text {
-          display: none;
-        }
-      }
-    </style>
 
     <h3
       class="container graph-section-title"
@@ -380,13 +342,6 @@
       />
     </div>
 
-    <style>
-      @media (max-width: 600px) {
-        #radar-chart {
-          width: 100%;
-        }
-      }
-    </style>
     <div class="rectangle" id="rectangle3" style="top: 350px">
       <p class="box-title">Les facteurs responsables de l’ICU</p>
       <p class="col-md-9 middle-box-text">
@@ -642,8 +597,8 @@
       <img class="credits-imgs" src="data/svg/ville-grenoble-logo.svg" />
     </div>
 
-    <div style="margin-bottom: 30px; position: relative; text-align: center">
-      <h6 style="font-weight: bold">
+    <div id="made-by-div">
+      <h6 id="made-by">
         Designed and Made by
         <a
           style="color: black; font-weight: bold"
@@ -654,22 +609,6 @@
         </a>
       </h6>
     </div>
-
-    <style>
-      h6 {
-        margin-top: 160px;
-        color: #000;
-        font-size: 12.857px;
-        font-family: "Lato", sans-serif;
-        font-weight: 275;
-        margin-right: 30px;
-      }
-
-      a:hover u {
-        opacity: 0.75;
-        transition: opacity 0.3s ease;
-      }
-    </style>
 
     <!-- <span style="color: gray">*<sup class="reference-num">1</sup></span> -->
 
@@ -709,23 +648,7 @@
             >*<sup class="reference-num"></sup
           ></span>
 
-          <p
-            style="
-              display: flex;
-              width: 451px;
-              flex-direction: column;
-              flex-shrink: 0;
-              color: #000;
-
-              /* Body/Small */
-              font-size: 12px;
-              font-family: Inter;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 18px;
-              margin-bottom: 0; /* Add this line to remove bottom margin */
-            "
-          >
+          <p class="more-info-text">
             Les données de la station du Versoud proviennent de Météo France.
           </p>
         </div>
@@ -735,23 +658,7 @@
             style="color: gray; display: inline-block; vertical-align: middle"
             >*<sup class="reference-num">1</sup></span
           >
-          <p
-            style="
-              width: 451px;
-              flex-direction: column;
-              flex-shrink: 0;
-              color: #000;
-
-              /* Body/Small */
-              font-size: 12px;
-              font-family: Inter;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 18px;
-              margin-bottom: 0; /* Add this line to remove bottom margin */
-              margin-left: 10px; /* Add this line to create spacing between the span and the text */
-            "
-          >
+          <p class="more-info-text">
             Les classes choisies sont les suivantes : - "Modéré" : Ecart de
             température inférieure à 3°C - "Marqué" : Ecart de température de
             3°C à 4°C - "Intense" : Ecart de température supérieure à 4°C Ces
@@ -765,25 +672,21 @@
             >*<sup class="reference-num">2</sup></span
           >
 
-          <p
-            style="
-              width: 451px;
-              flex-direction: column;
-              flex-shrink: 0;
-              color: #000;
-
-              /* Body/Small */
-              font-size: 12px;
-              font-family: Inter;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 18px;
-              margin-bottom: 0; /* Add this line to remove bottom margin */
-              margin-left: 10px; /* Add this line to create spacing between the span and the text */
-            "
-          >
+          <p class="more-info-text">
             La station du Versoud est située en pleine campagne, à 12 km de
             Grenoble
+          </p>
+        </div>
+
+        <div style="display: flex">
+          <p class="more-info-text">
+            <br />
+            <br />
+            Pour Aller Plus Loin :
+            <a
+              href=" https://www.grenoble.fr/cms_viewFile.php?idtf=28295&path=ilot-de-chaleur-urbain.pdf"
+              >ilot-de-chaleur-urbain.pdf</a
+            >
           </p>
         </div>
       </div>
@@ -797,32 +700,5 @@
         newSection.style.display = "block";
       });
     </script>
-
-    <h5>
-      https://www.grenoble.fr/cms_viewFile.php?idtf=28295&path=ilot-de-chaleur-urbain.pdf
-    </h5>
-
-    <style>
-      #aller-loin {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        margin-top: 90px;
-      }
-
-      #last-message-description {
-        position: absolute;
-        margin-bottom: 12vh;
-        font-family: "Outfit";
-        font-style: normal;
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 120%;
-        /* identical to box height, or 36px */
-
-        color: #aaaaaa;
-      }
-    </style>
   </body>
 </html>
