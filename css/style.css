@@ -349,6 +349,8 @@ a:hover u {
 
 
 @media only screen and (max-width: 767px) {
+
+  .more-info-text {font-size: 10px; width: 350px;}
   .popup-text {
     display: none;
   }
