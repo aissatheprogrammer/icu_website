@@ -334,6 +334,20 @@ a:hover u {
 
 .credits-imgs {width: 179px; height: 179px; margin: 0 45px}
 
+
+.asterisk-section {color: gray}
+
+.gray-subtitles{color: #7c868e;
+  text-align: center;
+  font-size: 15.036px;
+  font-family: Verdana;
+}
+
+.lcz-analytics-titles{text-align: center; font-weight: bold}
+
+.more-info-category{display: flex}
+
+
 @media only screen and (max-width: 767px) {
   .popup-text {
     display: none;
