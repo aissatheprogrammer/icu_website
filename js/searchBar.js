@@ -119,6 +119,8 @@ function fetchUserIcuValue() {
 }
 
 function findIcuVal(data, latitude, longitude) {
+  // Select and remove the div element with the class "no-graph-allert"
+  document.querySelector(".no-graph-allert")?.remove();
   for (var i = 0; i < data.features.length; i++) {
     var region = data.features[i];
     if (d3.geoContains(region, [longitude, latitude])) {
@@ -256,9 +258,6 @@ suggestionList.addEventListener("click", (event) => {
 
                   // Change the text content of the element
                   barchartElement.textContent = "Votre LCZ";
-
-                  // Select and remove the div element with the class "no-graph-allert"
-                  document.querySelector(".no-graph-allert")?.remove();
 
                   if (closestPointsDict[key].icuRadarClass == icuClass) {
                     if (!chosenRadar) {
