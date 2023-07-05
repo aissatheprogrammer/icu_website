@@ -60,7 +60,6 @@ export function updateBarChart(varLcz) {
 
       // format the data
       data.forEach(function (d) {
-        console.log("zzzzz", data);
         d.Bâties = +d.Bâties;
         d.Surf_Imper = +d.Surf_Imper;
         d.Vég = +d.Vég;

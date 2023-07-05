@@ -5,10 +5,8 @@ let firstCall = true;
 
 export function drawHeatMap() {
   anychart.onDocumentReady(function () {
-    
     // create data
     var data = result;
-    console.log("vvvvvv", data);
 
     // Find the date with the highest value
     var highestValue = -Infinity;
@@ -21,7 +19,6 @@ export function drawHeatMap() {
       }
     }
 
-    console.log("Highest value date:", highestDate);
     graphUpdater(formatDate(highestDate));
 
     // If it's not the first call, clear the container before drawing a new chart
@@ -68,7 +65,6 @@ export function drawHeatMap() {
 
     // add a click event listener to the chart to log the selected date
     chart.listen("pointClick", function (e) {
-      console.log("Date selected:", formatDate(e.iterator.get("x")));
       graphUpdater(formatDate(e.iterator.get("x")));
     });
     chart.tooltip(false);

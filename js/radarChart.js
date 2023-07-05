@@ -199,14 +199,11 @@ var radar;
 function graphUpdater(inputDate) {
   d3.csv("data/csv/fake_merged.csv", function (data) {
     if (!chosenRadar) {
-      console.log("FERERERER");
       radar = closestPointsDict[1].id;
-      console.log;
     } else {
       radar = chosenRadar;
     }
-    console.log(data);
-    console.log("77777777U77", parseFloat(radar).toFixed(1));
+
     // Looping all the data to find the exact day wanted
     for (i = 0; i < data.length; i++) {
       if (
@@ -234,11 +231,8 @@ function removeRadarChart() {
 
 export function dataHeatMap() {
   d3.csv("data/csv/fake_merged.csv", (error, data) => {
-    console.log("UYTUTUTTYUTTYTUTYTUTTYTU");
     if (!chosenRadar) {
-      console.log("FERERERER");
       radar = closestPointsDict[1].id;
-      console.log;
     } else {
       radar = chosenRadar;
     }

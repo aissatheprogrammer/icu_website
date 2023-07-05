@@ -11,7 +11,6 @@ const suggestionList = document.querySelector(".suggestion-list");
 function fetchSuggestions(event) {
   // get the value of the input field
   const value = event.target.value.toLowerCase();
-  console.log("inputted address: ", value);
 
   if (value.length < 3) {
     // clear the suggestion list and remove the border class
@@ -47,7 +46,6 @@ function fetchSuggestions(event) {
 function getlczId(lat, long, data) {
   // Check if the coordinates are contained within any of the regions
   var contains = d3.geoContains(data, [long, lat]);
-  console.log("my coordinates are : ", long, lat);
 
   if (contains) {
     // If the coordinates are contained within a region, find the region and return its name
@@ -63,8 +61,6 @@ function getlczId(lat, long, data) {
   }
 }
 
-/////////////////////////
-
 export var chosenRadar;
 
 function fetchUserIcuValue() {
@@ -75,8 +71,6 @@ function fetchUserIcuValue() {
 
       // Test the function with some coordinates
       let icuVal = findIcuVal(data, inputCoordinates[1], inputCoordinates[0]);
-
-      console.log("ICU value:", icuVal);
 
       // Log the color based on the ICU value
       if (icuVal >= -8 && icuVal < 25) {
@@ -92,12 +86,7 @@ function fetchUserIcuValue() {
       } else if (icuVal >= 45) {
         icuClass = "red";
       }
-      console.log(
-        "dictionarydictionarydictionarydictionarydictionarydictionary dictionarydictionarydictionarydictionarydictionarydictionary",
-        closestPointsDict,
-        "icuClass icuClass icuClass ",
-        icuClass
-      );
+
       setTimeout(() => {
         const icuColorsList = [
           "cold-blue",
@@ -107,18 +96,14 @@ function fetchUserIcuValue() {
           "orange",
           "red",
         ]; // Replace with your list
-        console.log("VVVVVVVVVVVVV", icuColorsList);
+
         let icuColoredRectangle;
         for (let i = 0; i < icuColorsList.length; i++) {
-          console.log("XXXXXXXXXXXXXXXXXXXX", icuClass);
           if (icuColorsList[i] === icuClass) {
             icuColoredRectangle = document.getElementById(
               `icu-rectangle-${icuClass}`
             );
-            console.log(
-              "LLLLLLLLLLLLLLLLLLLLLLLLL",
-              `icu-rectangle-${icuClass}`
-            );
+
             icuColoredRectangle.style.opacity = "0"; // Set initial opacity to 0
             icuColoredRectangle.style.display = "inline-block";
 
@@ -161,20 +146,14 @@ suggestionList.addEventListener("click", (event) => {
       .then((data) => {
         inputCoordinates = data.features[0].geometry.coordinates;
 
-        ////////////////////////////////////
-
         const givenPoint = [inputCoordinates[0], inputCoordinates[1]]; // Coordinates of the given point
         const range = 500; // Range in meters
-
-        console.log("givenPoint ", givenPoint);
 
         // Fetch the GeoJSON file
         fetch("./data/json/capteurs2_gre_Random.geojson")
           .then((response) => response.json())
           .then((data) => {
             const features = data.features;
-
-            console.log("454454", features);
 
             let closestPoints = []; // Array to store the closest points
 
@@ -235,27 +214,21 @@ suggestionList.addEventListener("click", (event) => {
                 coordinates: point.coordinates,
               };
             });
-
-            console.log("Closest points in range:", closestPointsDict);
           })
           .catch((error) => {
             console.error("Error loading GeoJSON file:", error);
           });
 
-        //////////////////////////////
-
         // Move the code that relies on inputCoordinates here
         d3.json("./data/json/lcz_contours.geojson", function (error, data) {
           if (error) throw error;
           var lczId = getlczId(inputCoordinates[1], inputCoordinates[0], data);
-          console.log("aaaa", lczId);
           updateBarChart(lczId);
 
           function logCoordinates(closestPointsDict) {
             for (const key in closestPointsDict) {
               const point = closestPointsDict[key];
               const coordinates = point.coordinates;
-              console.log(`Coordinates for point ${key}: ${coordinates}`);
               d3.json(
                 "./data/json/test-carte_icu_projecton-final.geojson",
                 function (error, data) {
@@ -263,8 +236,6 @@ suggestionList.addEventListener("click", (event) => {
 
                   // Test the function with some coordinates
                   let icuVal = findIcuVal(data, coordinates[1], coordinates[0]);
-
-                  console.log("find icu val: ", icuVal);
 
                   // Log the color based on the ICU value of the radar
                   if (icuVal >= -8 && icuVal < 30) {
@@ -279,15 +250,6 @@ suggestionList.addEventListener("click", (event) => {
                     closestPointsDict[key].icuRadarClass = "red";
                   }
 
-                  console.log(
-                    "FGFGFGFGF",
-                    closestPointsDict[key],
-                    "FGFGFGFGF",
-                    closestPointsDict[key].icuRadarClass,
-                    "FRATRAAA",
-                    icuClass
-                  );
-
                   // Find the element with the ID "barchart-label-1"
                   var barchartElement =
                     document.getElementById("barchart-label-1");
@@ -301,7 +263,6 @@ suggestionList.addEventListener("click", (event) => {
                   if (closestPointsDict[key].icuRadarClass == icuClass) {
                     if (!chosenRadar) {
                       chosenRadar = closestPointsDict[key].id;
-                      console.log("555555555", chosenRadar);
                       selectingClosestRadar();
                     }
                   }
@@ -325,9 +286,6 @@ suggestionList.addEventListener("click", (event) => {
             }
           }, 5);
           map.setCenter(inputCoordinates);
-          // map.scrollWheelZoom.disable();
-          // add markers to map
-          // disable click to drag -> map.dragPan.disable();
 
           // create a HTML element for each feature
           const el = document.createElement("div");
@@ -342,8 +300,6 @@ suggestionList.addEventListener("click", (event) => {
           // Change a div's CSS properties with ID
           let divById = document.getElementById("map");
           divById.style.pointerEvents = "auto"; // Enable pointer events
-
-          //////////////////////
 
           // Part where I personalize the svg value by the user's lcz median height ect...
           // Load CSV file using d3-request
@@ -362,9 +318,6 @@ suggestionList.addEventListener("click", (event) => {
             }
 
             const [hauteurMoy, usersSvf] = getHauteurById(lczId);
-            console.log("users LCZ", lczId);
-
-            console.log("8787878787878787878788");
 
             let userSvfElement = document.getElementById("users-svf");
             userSvfElement.innerHTML = usersSvf;
