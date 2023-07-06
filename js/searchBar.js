@@ -273,7 +273,7 @@ suggestionList.addEventListener("click", (event) => {
           // Call the fetchUserIcuValue function to fetch the DN value
           fetchUserIcuValue(inputCoordinates);
           logCoordinates(closestPointsDict);
-          selectingClosestRadar();
+
 
           let zoom = map.getZoom();
           let targetZoom = 15;
