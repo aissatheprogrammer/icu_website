@@ -119,8 +119,6 @@ function fetchUserIcuValue() {
 }
 
 function findIcuVal(data, latitude, longitude) {
-  // Select and remove the div element with the class "no-graph-allert"
-  document.querySelector(".no-graph-allert")?.remove();
   for (var i = 0; i < data.features.length; i++) {
     var region = data.features[i];
     if (d3.geoContains(region, [longitude, latitude])) {
@@ -262,6 +260,10 @@ suggestionList.addEventListener("click", (event) => {
                   if (closestPointsDict[key].icuRadarClass == icuClass) {
                     if (!chosenRadar) {
                       chosenRadar = closestPointsDict[key].id;
+
+                      // Select and remove the div element with the class "no-graph-allert"
+                      document.querySelector(".no-graph-allert")?.remove();
+                      document.querySelector(".no-graph-allert")?.remove();
                       selectingClosestRadar();
                     }
                   }
@@ -273,7 +275,6 @@ suggestionList.addEventListener("click", (event) => {
           // Call the fetchUserIcuValue function to fetch the DN value
           fetchUserIcuValue(inputCoordinates);
           logCoordinates(closestPointsDict);
-
 
           let zoom = map.getZoom();
           let targetZoom = 15;
