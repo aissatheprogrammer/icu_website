@@ -92,11 +92,41 @@
       </svg>
     </div>
 
+    <style>
+      /* For mobile devices */
+      @media (max-width: 767px) {
+        #mapbox-legend {
+          display: none; /* Hide the default SVG on mobile */
+        }
+      }
+
+      /* For desktop devices */
+      @media (min-width: 768px) {
+        #mapbox-legend {
+          display: none; /* Hide the mobile SVG on desktop */
+        }
+        .desktop-legend {
+          display: block; /* Show the desktop SVG on desktop */
+        }
+      }
+    </style>
+
+    <div
+      class="container desktop-legend"
+      style="position: absolute; margin-top: -40px"
+    >
+      <img
+        class="img-fluid"
+        src="data/svg/mapbox_legend.svg"
+        alt="Legende Carte Mapbox (Desktop)"
+      />
+    </div>
+
     <div class="container" style="position: absolute; margin-top: -40px">
       <img
         id="mapbox-legend"
         class="img-fluid"
-        src="data/svg/mapbox_legend.svg"
+        src="data/svg/mobile-mapbox-legend.svg"
         alt="Legende Carte Mapbox"
       />
     </div>
@@ -387,6 +417,9 @@
       style="margin-top: 90px"
       preserveAspectRatio="xMidYMid meet"
     ></svg>
+
+    <script type="module" src="./js/horizontalBarChart.js"></script>
+
     <div class="container">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-3">
@@ -459,8 +492,6 @@
         </div>
       </div>
     </div>
-
-    <script type="module" src="./js/horizontalBarChart.js"></script>
 
     <div id="tooltip" class="hidden">
       <p><strong></strong> <span id="key"></span></p>
