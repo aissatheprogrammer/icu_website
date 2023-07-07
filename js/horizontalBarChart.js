@@ -1,9 +1,9 @@
-var margin = { top: 20, right: 20, bottom: 30, left: 150 },
-  width =
-    parseInt(d3.select("#bar-graph").style("width")) -
-    margin.left -
-    margin.right,
-  height = 285 - margin.top - margin.bottom;
+var margin = { top: 20, right: 20, bottom: 30, left: 150 };
+var svgWidth = window.innerWidth * 1;
+var svgHeight = 285;
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
+var centerX = (window.innerWidth - svgWidth) / 2;
 
 // set the ranges
 var y = d3.scaleBand().range([height, 0]).padding(0.3);
@@ -22,15 +22,12 @@ var svgBar = d3
   .select("#bar-graph")
   .append("svg")
   .attr("preserveAspectRatio", "xMinYMin meet")
-  .attr(
-    "viewBox",
-    "0 0 " +
-      (width + margin.left + margin.right + 200) +
-      " " +
-      (height + margin.top + margin.bottom)
-  )
+  .attr("viewBox", "0 0 " + svgWidth + " " + svgHeight)
   .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr(
+    "transform",
+    "translate(" + (margin.left + centerX) + "," + margin.top + ")"
+  );
 
 export function updateBarChart(varLcz) {
   // get the data
