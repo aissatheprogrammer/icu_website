@@ -406,3 +406,65 @@ a:hover u {
     margin-top: 200px;
   }
 }
+
+
+@media only screen and (max-width: 1023px) {
+
+  .more-info-text {
+    font-size: 12px;
+    width: 400px;
+  }
+
+  .popup-text {
+    display: none;
+  }
+
+  .credits-imgs {
+    width: 107px;
+    height: 107px;
+    flex-shrink: 0;
+  }
+
+  /* Your tablet styles here */
+  .title {
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .box-title {
+    margin-top: 30px;
+    font-weight: 400;
+    font-size: 15px;
+  }
+
+  .rectangle {
+    text-overflow: ellipsis;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+  }
+
+  .middle-box-text {
+    width: 400px;
+    margin-top: 60px;
+  }
+
+  #last-message-box {
+    font-size: 15px;
+  }
+
+  .graph-section-title {
+    font-size: 18px;
+    margin-top: 250px;
+    width: 120px;
+    height: 13.15px;
+  }
+
+  .mapbox-title-box-text {
+    font-size: 14px;
+  }
+
+  #container {
+    width: 600px;
+    margin-top: 250px;
+  }
+}
