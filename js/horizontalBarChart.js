@@ -1,9 +1,9 @@
 var margin = { top: 20, right: 20, bottom: 30, left: 150 };
-var svgWidth = window.innerWidth * 1.1;
+var svgWidth = window.innerWidth * 1.2;
 var svgHeight = 285;
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
-var centerX = window.innerWidth / 2;
+var centerX = window.innerWidth / 2.6;
 
 // set the ranges
 var y = d3.scaleBand().range([height, 0]).padding(0.3);
