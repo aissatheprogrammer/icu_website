@@ -275,8 +275,6 @@ suggestionList.addEventListener("click", (event) => {
           fetchUserIcuValue(inputCoordinates);
           logCoordinates(closestPointsDict);
 
-          console.log("4444", closestPointsDict);
-
           if (closestPointsDict != null) {
             selectingClosestRadar();
           }
