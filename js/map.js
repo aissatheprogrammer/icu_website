@@ -1,9 +1,9 @@
 import { chosenRadar, closestPointsDict } from "./searchBar.js";
 import { dataHeatMap } from "./radarChart.js";
+import { apiKey } from "./apiKey.js";
 
 // mapbox token
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiYWJyYWNhZGFicmEwMSIsImEiOiJjbGVzcDJkeGMxNTBrM3lxcm1jMTFwdnJ6In0.LMBtWVupDcCbIViaBze5xg";
+mapboxgl.accessToken = apiKey;
 
 export var map = new mapboxgl.Map({
   container: "map",
@@ -36,7 +36,6 @@ map2.addControl(new mapboxgl.NavigationControl());
 map2.addControl(new mapboxgl.ScaleControl(), "bottom-right");
 
 export function selectingClosestRadar() {
-  console.log("testezsqteqdsfqds fra fra gre gre ", chosenRadar);
   // Reset the stroke color of all points to the default color (black)
   map.setPaintProperty("capteur-gre-randomized", "circle-stroke-color", "#000");
 
