@@ -325,7 +325,8 @@ a:hover u {
   flex-direction: column;
   flex-shrink: 0;
   /* Body/Small */
-  font-size: 12px;
+  font-size: 15px;
+  color: rgb(43, 43, 43);
   font-family: Inter;
   font-style: normal;
   font-weight: 400;
