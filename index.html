@@ -542,50 +542,33 @@
   Explorez la carte complète
   </h3>
 
-    <div
-      class="container"
-      style="
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: -40px;
-      "
-    >
-      <img
-        id="mapbox-last-legend"
-        class="img-fluid"
-        src="data/svg/last-map-legend.svg"
-        alt="Legende Derniere Carte Mapbox"
-      />
-    </div>
+  <div class="container" style="position: absolute; left: 50%; transform: translateX(-50%); margin-top: -40px;">
+    <img id="mapbox-last-legend" class="img-fluid" src="data/svg/last-map-legend.svg" alt="Legende Derniere Carte Mapbox" />
+  </div>
 
-    <script>
-      // Check if the device is mobile or desktop
-      function isMobileDevice() {
-        return (
-          typeof window.orientation !== "undefined" ||
-          navigator.userAgent.indexOf("IEMobile") !== -1
-        );
+  <script>
+    // Check if the device is mobile or desktop
+    function isMobileDevice() {
+      return /Mobi|Android/i.test(navigator.userAgent);
+    }
+
+    // Update the SVG source and margin-top based on the device type
+    function updateLegend() {
+      var legendImg = document.getElementById("mapbox-last-legend");
+      if (isMobileDevice()) {
+        legendImg.src = "data/svg/mobile-last-map-legend.svg";
+        legendImg.alt = "Legende Carte Mapbox (Mobile)";
+        legendImg.parentElement.style.marginTop = "-80px"; // Update the margin-top for mobile
+      } else {
+        legendImg.src = "data/svg/last-map-legend.svg";
+        legendImg.alt = "Legende Carte Mapbox (Desktop)";
+        legendImg.parentElement.style.marginTop = "-40px"; // Reset the margin-top for desktop
       }
+    }
 
-      // Update the SVG source and margin-top based on the device type
-      function updateLegend() {
-        var legendImg = document.getElementById("mapbox-last-legend");
-        if (isMobileDevice()) {
-          legendImg.src = "data/svg/mobile-last-map-legend.svg";
-          legendImg.alt = "Legende Carte Mapbox (Mobile)";
-          legendImg.parentElement.style.marginTop = "-80px"; // Update the margin-top for mobile
-        } else {
-          legendImg.src = "data/svg/last-map-legend.svg";
-          legendImg.alt = "Legende Carte Mapbox (Desktop)";
-          legendImg.parentElement.style.marginTop = "-40px"; // Reset the margin-top for desktop
-        }
-      }
-
-      // Call the updateLegend function on page load
-      window.addEventListener("load", updateLegend);
-    </script>
-
+    // Call the updateLegend function on page load
+    window.addEventListener("load", updateLegend);
+  </script>
     <div
       id="map2"
       style="width: 100%; height: 720px; width: 90vw; margin: 0 auto"
