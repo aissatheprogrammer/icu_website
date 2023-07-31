@@ -547,12 +547,15 @@
   <script>
     // Check if the device is mobile or desktop
     function isMobileDevice() {
-      return window.innerWidth <= 768; // Adjust the breakpoint as needed for mobile detection
+      return (
+        typeof window.orientation !== "undefined" ||
+        navigator.userAgent.indexOf("IEMobile") !== -1
+      );
     }
-  
+
     // Update the SVG source and margin-top based on the device type
     function updateLegend() {
-      var legendImg = document.getElementById("mapbox-last-legend");
+      var legendImg = document.getElementById("mapbox-legend");
       if (isMobileDevice()) {
         legendImg.src = "data/svg/mobile-last-map-legend.svg";
         legendImg.alt = "Legende Carte Mapbox (Mobile)";
@@ -563,10 +566,11 @@
         legendImg.parentElement.style.marginTop = "-40px"; // Reset the margin-top for desktop
       }
     }
-  
+
     // Call the updateLegend function on page load
     window.addEventListener("load", updateLegend);
   </script>
+
   
 
     <div
