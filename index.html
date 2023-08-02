@@ -705,6 +705,13 @@
       </div>
     </div>
 
+    <script>
+      const svg = document.getElementById("svg-click");
+      const newSection = document.getElementById("new-section");
 
+      svg.addEventListener("click", function () {
+        newSection.style.display = "block";
+      });
+    </script>
   </body>
 </html>
