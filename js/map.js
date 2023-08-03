@@ -3,7 +3,7 @@ import { dataHeatMap } from "./radarChart.js";
 
 // mapbox token
 mapboxgl.accessToken =
-  "pk.eyJ1IjoiYWJyYWNhZGFicmEwMSIsImEiOiJjbGVzcDJkeGMxNTBrM3lxcm1jMTFwdnJ6In0.LMBtWVupDcCbIViaBze5xg";
+  "pk.eyJ1Ijoic3BlbGxvdXgiLCJhIjoiY2xrdGdpOTMyMDFpejNlcG1jYjBqdGN3YSJ9.l4De2pmZnlCo8tgivXGA4Q";
 
 export var map = new mapboxgl.Map({
   container: "map",
