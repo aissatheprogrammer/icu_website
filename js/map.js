@@ -1,6 +1,5 @@
 import { chosenRadar, closestPointsDict } from "./searchBar.js";
 import { dataHeatMap } from "./radarChart.js";
-import { apiKey } from "./apiKey.js";
 
 // mapbox token
 mapboxgl.accessToken =
